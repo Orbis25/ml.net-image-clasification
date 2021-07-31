@@ -1,0 +1,43 @@
+﻿@model peoples_clasification_ia.Controllers.Post
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h3 class="display-4">Hola!, queremos identificarte para saber si eres una persona sospechosa o normal</h3>
+
+
+    <div class="row justify-content-center mt-5 mb-5">
+        <div class="col-6 mt-5">
+            <form method="post" asp-action="Index" enctype="multipart/form-data">
+                <label class="label">Selecciona una imagen</label>
+                <input class="form-control form-control-sm" type="file" accept="image/*" asp-for="Image" />
+                <button class="btn btn-sm btn-success mt-2">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    @if (ViewBag.Result != null)
+    {
+        <div class="row">
+            <div class="col-6">
+                <img src="@ViewBag.Imagen" width="400" class="image mb-5" />
+                <br />
+               
+            </div>
+            <div class="col-6">
+                <h4 class="text-success"><b>Personal Normal : @ViewBag.Sospech%</b></h4> <br />
+                <h4 class="text-danger"><b>Persona Sospechosa : @ViewBag.Normal%</b></h4>
+
+                @if (ViewBag.Result == "sospechoso")
+                {
+                    <span class="text-danger">Usted es sospechoso manito, <br /> por favor retirese lentamente, estaremos llamando a la policia :)</span>
+                }
+                else
+                {
+                    <span class="text-success">Usted no es nada sopechoso</span>
+                }
+            </div>
+        </div>
+    }
+</div>
